@@ -4,6 +4,8 @@
   "description": "Vehicle and fleet management system",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
+    "stop": "killall node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
