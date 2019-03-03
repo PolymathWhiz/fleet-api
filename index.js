@@ -21,6 +21,7 @@ app.use(express.json());
 
 // Routes imports 
 const AuthRoute = require('./api/routes/auth');
+const BookRoute = require('./api/routes/bookings');
 
 // Exposed routes
 app.get("/", (req, res) => {
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/auth', AuthRoute);
+app.use('/book', BookRoute);
 
 
 
