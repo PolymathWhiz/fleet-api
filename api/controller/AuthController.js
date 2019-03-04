@@ -15,7 +15,7 @@ exports.login = async (req, res) => {
       const email = trim(req.body.email).toLowerCase();
       const password = trim(req.body.password);
 
-      const [checkEmail] = await db.execute("SELECT id, password, first_name, last_name, user_type, created_at, updated_at FROM users WHERE email = ?", [email]);
+      const [checkEmail] = await db.execute("SELECT id, token, password, first_name, last_name, user_type, created_at, updated_at FROM users WHERE email = ?", [email]);
 
       if (checkEmail.length === 0) {
         return res.status(401).json({
@@ -25,6 +25,7 @@ exports.login = async (req, res) => {
       }
 
       const dbPassword = checkEmail[0].password;
+      const token = checkEmail[0].token;
 
       if (!checkPassword(password, dbPassword)) {
         return res.status(400).json({
@@ -42,7 +43,8 @@ exports.login = async (req, res) => {
           last_name: checkEmail[0].last_name,
           user_type: checkEmail[0].user_type,
           created: checkEmail[0].created_at,
-          updated_at: checkEmail[0].updated_at
+          updated_at: checkEmail[0].updated_at,
+          token
         }
       });
     } else {

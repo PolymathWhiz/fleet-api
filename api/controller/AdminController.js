@@ -4,7 +4,7 @@ const {
   trim
 } = require('../helper/util');
 
-exports.createVehicle = asyn(req, res) => {
+exports.createVehicle = async (req, res) => {
   try {
     if (trim(req.body.token) && trim(req.body.vehicle_type) && trim(req.body.vehicle_model) && trim(req.body.vehicle_number) && trim(req.body.vehicle_capacity) && trim(req.body.driver_name)) {
       const token = trim(req.body.token);
