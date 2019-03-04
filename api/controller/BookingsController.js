@@ -69,10 +69,16 @@ exports.viewBookings = async (req, res) => {
 
       const [bookings] = await db.execute("SELECT * FROM bookings WHERE user_id = ?", [userID]);
 
+      let data = [];
+
+      for (let i = 0; i < bookings.length; i++) {
+        data.push(bookings[i]);
+      }
+
       return res.status(200).json({
         success: true,
         message: 'Successfully fetched bookings',
-        data: bookings[0]
+        data
       });
     } else {
       return res.status(400).json({
